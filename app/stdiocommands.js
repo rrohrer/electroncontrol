@@ -1,16 +1,16 @@
 readline = require('readline')
 
 // hold all of the commands that are registered.
-var commandMap {};
+var commandMap =  {};
 var read = readline.createInterface({input: process.stdin});
 // Start - initializes and starts running the command queue.
 exports.Start = function () {
-    read.on('line', readlineCallback)
+    read.on('line', readlineCallback);
 }
 
 // Stop - stops listening on the stdin
 exports.Stop = function () {
-    read.Close()
+    read.Close();
 }
 
 // Listen - allows tne app to listen to a command that is sent to stdin.
@@ -28,16 +28,16 @@ var readlineCallback = function (line) {
     obj = JSON.parse(jsonData);
 
     // call the callback handler for that command.
-    callback = commandMap[obj.CommandID]
-    if (callback) callback(obj.CommandBody)
+    callback = commandMap[obj.CommandID];
+    if (callback) callback(obj.CommandBody);
 }
 
 // Command - sends a command to stdout.
 exports.Command = function (commandID, commandBody) {
     // make the command
-    obj = {CommandID: CommandID, CommandBody: commandBody}
+    obj = {CommandID: commandID, CommandBody: commandBody};
 
     // serialize to JSON, base64 encode, write to stdout.
-    jsonBuffer = new Buffer(JSON.stringify(obj))
-    process.stdout.write(jasonBuffer.toString('base64') + "\n")
+    jsonBuffer = new Buffer(JSON.stringify(obj));
+    process.stdout.write(jsonBuffer.toString('base64') + "\n");
 }
