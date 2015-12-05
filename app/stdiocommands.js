@@ -31,3 +31,13 @@ var readlineCallback = function (line) {
     callback = commandMap[obj.CommandID]
     if (callback) callback(obj.CommandBody)
 }
+
+// Command - sends a command to stdout.
+exports.Command = function (commandID, commandBody) {
+    // make the command
+    obj = {CommandID: CommandID, CommandBody: commandBody}
+
+    // serialize to JSON, base64 encode, write to stdout.
+    jsonBuffer = new Buffer(JSON.stringify(obj))
+    process.stdout.write(jasonBuffer.toString('base64') + "\n")
+}
