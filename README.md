@@ -14,15 +14,14 @@ The structure of commands is:
 ### Commands:
 Commands are strings, all lower case with underscores ex: `command_name`.  Many commands have responses which are of the format:
 `[command_name]_response`.
+---
+**window_create**: Creates a window with `new BrowserWindow(options)`. `CommandBody` should be an `options` object as defined in atom.io's BrowserWindow class.
 
-
-
-*window_create*: Creates a window with `new BrowserWindow(options)`. `CommandBody` should be an `options` object as defined in atom.io's BrowserWindow class.
-
-responds with *window_create_response*.
+Responds with **window_create_response**.
 
 ```JSON
 CommandBody{
-    "WindowID" : "numerical_ID" 
+    "WindowID" : "numerical_ID"
 }
 ```
+---
