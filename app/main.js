@@ -2,8 +2,6 @@ const electron = require('electron');
 const app = electron.app;  // Module to control application life.
 const BrowserWindow = electron.BrowserWindow;  // Module to create native browser window.
 
-commands = require('./stdiocommands');
-
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 var mainWindow = null;
@@ -28,9 +26,6 @@ app.on('ready', function() {
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
-
-  //test writing to stdout
-  commands.Command("test", {hello: "test"});
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
