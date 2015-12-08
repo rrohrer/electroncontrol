@@ -20,7 +20,7 @@ exports.Register = function () {
 // responds with a window_create_response command.
 var windowCreate = function (options) {
     // create the window
-    browser = new BrowserWindow(options)
+    browser = new BrowserWindow(JSON.parse(options))
 
     // store it in the active windows table.
     responseIndex = activeWindowIndex
