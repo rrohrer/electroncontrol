@@ -1,5 +1,6 @@
 # electron control
-minimal electron app that allows controlling the shell via stdin and stdout
+minimal electron app that allows controlling the shell via a remote process.
+Uses stdin/stdout on non windows OS, and a named pipe on windows.
 
 ## Protocol
 The base of the protocol is base64 encoded JSON commands + bodies delimited by newline characters.

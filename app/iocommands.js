@@ -1,13 +1,17 @@
+net = require('net')
 readline = require('readline')
 const dialog = require('electron').dialog
-
+const PIPE_PATH = "\\\\.\\pipe\\ElectronControl"
 // hold all of the commands that are registered.
 var commandMap =  {};
-var read = readline.createInterface({input: process.stdin})
+var read
+var clientConnection
+
 // Start - initializes and starts running the command queue.
 exports.Start = function () {
+    clientConnection = net.connect({path:PIPE_PATH})
+    read = readline.createInterface({input: clientConnection})
     read.on('line', readlineCallback)
-    dialog.showErrorBox("sanity", "sanity")
 }
 
 // Stop - stops listening on the stdin
@@ -22,6 +26,7 @@ exports.Listen = function (commandID, fn) {
 
 // readlineCallback - is called whenever the server sends a message to stdin.
 var readlineCallback = function (line) {
+    dialog.showErrorBox("something", "something")
     // line is base64 encoded so it needs to be decoded.
     buffer = new Buffer(line, 'base64')
     jsonData = buffer.toString()
@@ -32,8 +37,6 @@ var readlineCallback = function (line) {
     // call the callback handler for that command.
     callback = commandMap[obj.CommandID]
     if (callback) callback(obj.CommandBody)
-
-    dialog.showErrorBox("Error", line)
 }
 
 // Command - sends a command to stdout.

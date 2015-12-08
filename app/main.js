@@ -3,7 +3,7 @@ const app = electron.app;  // Module to control application life.
 const BrowserWindow = electron.BrowserWindow;  // Module to create native browser window.
 
 // command handler.
-const StdioCommands = require('./stdiocommands.js')
+const ioCommands = require('./iocommands.js')
 
 // imports of local controllers.
 const WindowControl = require('./windowcontrol.js')
@@ -30,23 +30,23 @@ app.on('ready', function() {
     // TODO: Send a handshake "ready to go" message.
     // start the command processor.
 
-    // TODO: move this to the beginning, once the handshake is in place.
-    StdioCommands.Start()
-
   // Create the browser window.
-  //mainWindow = new BrowserWindow({width: 800, height: 600});
+  mainWindow = new BrowserWindow({width: 800, height: 600});
 
   // and load the index.html of the app.
-  //mainWindow.loadURL('http://google.com')
+  mainWindow.loadURL('http://google.com')
 
   // Open the DevTools.
-  //mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
+
+  // TODO: move this to the beginning, once the handshake is in place.
+  ioCommands.Start()
 
   // Emitted when the window is closed.
-  //mainWindow.on('closed', function() {
+  mainWindow.on('closed', function() {
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
-    //mainWindow = null
-  //});
+    mainWindow = null
+  });
 });

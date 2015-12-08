@@ -3,7 +3,7 @@ const electron = require('electron')
 const BrowserWindow = electron.BrowserWindow
 
 // import the command processor.
-const Commands = require('./stdiocommands.js')
+const Commands = require('./iocommands.js')
 
 // map of active windows that are cuttently spawned by this manager.
 var activeWindows = {}
