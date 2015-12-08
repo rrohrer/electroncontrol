@@ -26,7 +26,6 @@ exports.Listen = function (commandID, fn) {
 
 // readlineCallback - is called whenever the server sends a message to stdin.
 var readlineCallback = function (line) {
-    dialog.showErrorBox("something", "something")
     // line is base64 encoded so it needs to be decoded.
     buffer = new Buffer(line, 'base64')
     jsonData = buffer.toString()
@@ -46,5 +45,5 @@ exports.Command = function (commandID, commandBody) {
 
     // serialize to JSON, base64 encode, write to stdout.
     jsonBuffer = new Buffer(JSON.stringify(obj));
-    process.stdout.write(jsonBuffer.toString('base64') + "\n")
+    clientConnection.write(jsonBuffer.toString('base64') + "\n")
 }
