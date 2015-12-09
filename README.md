@@ -54,6 +54,15 @@ CommandBody{
 
 ---
 
+**window_close** Message to close the window with the current ID.
+```JSON
+CommandBody{
+    "WindowID" : "numerical_ID"
+}
+```
+
+---
+
 **window_open_dev_tools** notifies the window to open the Webkit developer tools.
 ```JSON
 CommandBody{

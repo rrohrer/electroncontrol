@@ -19,6 +19,7 @@ exports.Register = function () {
     Commands.Listen("window_close_dev_tools", windowCloseDevTools)
     Commands.Listen("window_send_message", windowSendMessage)
     Commands.Listen("window_subscribe_message", windowSubscribeMessage)
+    Commands.Listen("window_close", windowClose)
 }
 
 // creates a window based on the JSON that was recieved in the window_create command.
@@ -45,6 +46,15 @@ var windowCreate = function (options) {
 
     // generate and send the response.
     Commands.Command("window_create_response", {WindowID: responseIndex})
+}
+
+var windowClose = function(options) {
+    obj = JSON.parse(options)
+
+    // check to see if there is a window with the ID:
+    if (obj.WindowID in activeWindows) {
+        activeWindows[obj.WindowID].close()
+    }
 }
 
 var windowLoadUrl = function (options) {
@@ -84,6 +94,6 @@ var windowSubscribeMessage = function (options) {
     obj = JSON.parse(options)
 
     electron.ipcMain.on(obj.MessageID, function(event, message){
-        Commands.Command("window_get_subscribed_message", message)
+        Commands.Command("window_get_subscribed_message", {WindowID: obj.WindowID, MessageID: obj.MessageID, Message: message})
     })
 }
