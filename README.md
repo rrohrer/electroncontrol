@@ -53,3 +53,21 @@ CommandBody{
 ```
 
 ---
+
+**window_open_dev_tools** notifies the window to open the Webkit developer tools.
+```JSON
+CommandBody{
+    "WindowID" : "numerical_ID"
+}
+```
+
+---
+
+**window_close_dev_tools** notifies the window to close the Webkit developer tools.
+```JSON
+CommandBody{
+    "WindowID" : "numerical_ID"
+}
+```
+
+---

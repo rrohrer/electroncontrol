@@ -15,6 +15,8 @@ var activeWindowIndex = 0
 exports.Register = function () {
     Commands.Listen("window_create", windowCreate)
     Commands.Listen("window_load_url", windowLoadUrl)
+    Commands.Listen("window_open_dev_tools", windowOpenDevTools)
+    Commands.Listen("window_close_dev_tools", windowCloseDevTools)
 }
 
 // creates a window based on the JSON that was recieved in the window_create command.
@@ -49,5 +51,21 @@ var windowLoadUrl = function (options) {
     // check to see if there is a window with the ID:
     if (obj.WindowID in activeWindows) {
         activeWindows[obj.WindowID].loadURL(obj.URL)
+    }
+}
+
+var windowOpenDevTools = function (options) {
+    obj = JSON.parse(options)
+
+    if (obj.WindowID in activeWindows) {
+        activeWindows[obj.WindowID].webContents.openDevTools()
+    }
+}
+
+var windowCloseDevTools = function (options) {
+    obj = JSON.parse(options)
+
+    if (obj.WindowID in activeWindows) {
+        activeWindows[obj.WindowID].webContents.closeDevTools()
     }
 }
