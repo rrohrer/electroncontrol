@@ -34,8 +34,9 @@ var readlineCallback = function (line) {
     obj = JSON.parse(jsonData)
 
     // call the callback handler for that command.
-    callback = commandMap[obj.CommandID]
-    if (callback) callback(obj.CommandBody)
+    if (obj.CommandID in commandMap) {
+        commandMap[obj.CommandID](obj.CommandBody)
+    }
 }
 
 // Command - sends a command to stdout.

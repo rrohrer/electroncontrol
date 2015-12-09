@@ -28,3 +28,28 @@ CommandBody{
 ```
 
 ---
+**window_load_url** loads URL in the window that is passed in.
+```JSON
+CommandBody{
+    "WindowID" : "numerical_ID",
+    "URL" : "foo.com"
+}
+```
+
+---
+**window_load_complete** sent TO the controlling process when a window finishes loading a URL.
+```JSON
+CommandBody{
+    "WindowID" : "numerical_ID"
+}
+```
+
+---
+**window_closed** is sent TO the controlling process when a window is closed.
+```JSON
+CommandBody{
+    "WindowID" : "numerical_ID"
+}
+```
+
+---
