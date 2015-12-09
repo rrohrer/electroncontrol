@@ -71,3 +71,38 @@ CommandBody{
 ```
 
 ---
+
+**window_send_message** sends a message to the renderer of a window (the web page that is hosted).
+`MessageID` is the name of the message being sent.  `Message` is the message body.
+```JSON
+CommandBody{
+    "WindowID" : "numerical_ID",
+    "MessageID" : "message_ID",
+    "Message" : "message_body"
+}
+```
+
+---
+
+**window_subscribe_message** adds a callback to get a message that CAN be sent by the renderer.
+`MessageID` is the name of the message being sent.
+```JSON
+CommandBody{
+    "WindowID" : "numerical_ID",
+    "MessageID" : "message_ID",
+}
+```
+
+---
+
+**window_get_subscribed_message** sends a from the hosted web app TO the controlling process.
+`MessageID` is the name of the message being sent.  `Message` is the message body.
+```JSON
+CommandBody{
+    "WindowID" : "numerical_ID",
+    "MessageID" : "message_ID",
+    "Message" : "message_body"
+}
+```
+
+---
