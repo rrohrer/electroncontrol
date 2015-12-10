@@ -26,10 +26,10 @@ exports.Register = function () {
 // responds with a window_create_response command.
 var windowCreate = function (options) {
     // create the window
-    browser = new BrowserWindow(JSON.parse(options))
+    var browser = new BrowserWindow(JSON.parse(options))
 
     // store it in the active windows table.
-    responseIndex = activeWindowIndex
+    var responseIndex = activeWindowIndex
     activeWindows[activeWindowIndex] = browser
     activeWindowIndex = activeWindowIndex + 1
 
@@ -49,7 +49,7 @@ var windowCreate = function (options) {
 }
 
 var windowClose = function(options) {
-    obj = JSON.parse(options)
+    var obj = JSON.parse(options)
 
     // check to see if there is a window with the ID:
     if (obj.WindowID in activeWindows) {
@@ -58,7 +58,7 @@ var windowClose = function(options) {
 }
 
 var windowLoadUrl = function (options) {
-    obj = JSON.parse(options)
+    var obj = JSON.parse(options)
 
     // check to see if there is a window with the ID:
     if (obj.WindowID in activeWindows) {
@@ -67,7 +67,7 @@ var windowLoadUrl = function (options) {
 }
 
 var windowOpenDevTools = function (options) {
-    obj = JSON.parse(options)
+    var obj = JSON.parse(options)
 
     if (obj.WindowID in activeWindows) {
         activeWindows[obj.WindowID].webContents.openDevTools()
@@ -75,7 +75,7 @@ var windowOpenDevTools = function (options) {
 }
 
 var windowCloseDevTools = function (options) {
-    obj = JSON.parse(options)
+    var obj = JSON.parse(options)
 
     if (obj.WindowID in activeWindows) {
         activeWindows[obj.WindowID].webContents.closeDevTools()
@@ -83,7 +83,7 @@ var windowCloseDevTools = function (options) {
 }
 
 var windowSendMessage = function (options) {
-    obj = JSON.parse(options)
+    var obj = JSON.parse(options)
 
     if (obj.WindowID in activeWindows) {
         activeWindows[obj.WindowID].webContents.send(obj.MessageID, obj.Message)
@@ -91,7 +91,7 @@ var windowSendMessage = function (options) {
 }
 
 var windowSubscribeMessage = function (options) {
-    obj = JSON.parse(options)
+    var obj = JSON.parse(options)
 
     electron.ipcMain.on(obj.MessageID, function(event, message){
         Commands.Command("window_get_subscribed_message", {WindowID: obj.WindowID, MessageID: obj.MessageID, Message: message})
