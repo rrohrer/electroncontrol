@@ -1,5 +1,6 @@
 net = require('net')
 readline = require('readline')
+const app = require ('electron').app
 const dialog = require('electron').dialog
 const PIPE_PATH = "\\\\.\\pipe\\ElectronControl"
 // hold all of the commands that are registered.
@@ -12,6 +13,9 @@ exports.Start = function () {
     clientConnection = net.connect({path:PIPE_PATH})
     read = readline.createInterface({input: clientConnection})
     read.on('line', readlineCallback)
+
+    // set up the callback to exit on close.
+    clientConnection.on('close', function (){app.quit()})
 }
 
 // Stop - stops listening on the stdin
